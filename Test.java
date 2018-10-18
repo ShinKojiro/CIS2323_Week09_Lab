@@ -5,16 +5,23 @@ public class Test{
 		
 		String fileName = "test.txt";
 		String line = null;
+		try{
+			// Access to file system
+			FileReader fileReader = new FileReader(fileName);
 		
-		// Access to file system
-		FileReader fileReader = new FileReader(fileName);
+			// Buffer our reader
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
 		
-		// Buffer our reader
-		BufferReader bufferReader = new BufferReader(fileReader);
-		
-		while((line = bufferReader.readLine()) != null){
-			System.out.println(line);
+			while((line = bufferedReader.readLine()) != null){
+				System.out.println(line);
+			}
+			bufferedReader.close();
 		}
-		bufferReader.close();
+		catch(FileNotFoundException ex){
+			System.out.println("Unable to open file: " + fileName);
+		}
+		catch(IOException ex){
+			System.out.println("Error reading file: " + fileName);
+		}
 	}
 }
